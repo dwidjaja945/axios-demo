@@ -1,24 +1,30 @@
 const BASE_URL = 'http://api.reactprototypes.com';
-const API_KEY = '?key=testuser1234';
+const API_KEY = '?key=c118demouser';
 
-axios.get(`${BASE_URL}/todos${API_KEY}`).then(resp => {
-    const { todos } = resp.data;
-    const table = $('table tbody');
+    // .get() takes two arguments, where to go and a configuration {}. 
+    // Does not always take configuration {}
+    // .then() takes a function to run once getting data
+axios.get( `${BASE_URL}/todos${API_KEY}` ).then( response => {
+    console.log('response: ' , response);
 
-    addToDom(todos, table);
-});
+    const listElements = response.data.todos.map( ( item , itemIndex ) => {
+        const tr = document.createElement('tr');
+        const number = document.createElement('td');
+        const title = document.createElement('td')
+        const completed = document.createElement('td');
 
-const addToDom = (list, container) => {
-    const tableRows = list.map((item, index) => {
+        number.innerText = itemIndex + 1;
+        title.innerText = item.title;
+        completed.innerText = item.complete;
 
-        const tableData = [
-            $(`<td>${index + 1}</td>`),
-            $(`<td>${item.title}</td>`),
-            item.complete ? $(`<td class="text-success">Yes</td>`) : $(`<td class="text-danger">No</td>`)
-        ];
+        tr.appendChild(number);
+        tr.appendChild(title);
+        tr.appendChild(completed);
 
-        return $('<tr>').append(tableData);
-    });
+        document.querySelector('.table tbody').appendChild(tr)
 
-    container.append(tableRows);
-};
+    } );
+} );
+
+
+
