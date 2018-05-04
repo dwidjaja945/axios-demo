@@ -26,5 +26,29 @@ axios.get( `${BASE_URL}/todos${API_KEY}` ).then( response => {
     } );
 } );
 
+const todoItem = {
+    titel: 'Dylan\'s todo item',
+    details: 'Pick things up and put them down'
+};
 
+axios.post(`${BASE_URL}/todos${API_KEY}`, todoItem ).then( response => {
+    console.log('Add Item Resp: ', response);
+} ).catch( error => {
+    // will never try to catch an error in a .catch(). It is redundant
+    try {
+        console.log("error: ", error.response.data.error);
 
+        console.log(error.message);
+
+        //Creating a new error message
+        const newError = new Error('This is the error message')
+        console.log("New Error: ", newError.message);
+
+        // throwing an error
+        throw (newError);
+
+        alert(error.response.data.error);
+    } catch(error) {
+        alert(error.message);
+    }
+} ); 
