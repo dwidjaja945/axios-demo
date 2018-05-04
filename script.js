@@ -1,5 +1,5 @@
 const BASE_URL = 'http://api.reactprototypes.com';
-const API_KEY = '?key=testuser1234';
+const API_KEY = '?key=c118demouser';
 
 axios.get(`${BASE_URL}/todos${API_KEY}`).then(resp => {
     const { todos } = resp.data;
@@ -22,3 +22,12 @@ const addToDom = (list, container) => {
 
     container.append(tableRows);
 };
+
+const todoItem = {
+    title: 'Dylan\'s todo item',
+    details: 'Pick things up and put them down'
+};
+
+axios.post(`${BASE_URL}/todos${API_KEY}`).then(resp => {
+
+});
